@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Entrevista Trabalhista</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+  :root {
+    --navy: #1B3A6B;
+    --navy-dark: #0f2347;
+    --gold: #C9963A;
+    --gold-light: #f0d49a;
+    --cream: #F7F4EF;
+    --cream-dark: #ede8df;
+    --text: #2A2A2A;
+    --muted: #7a7060;
+    --line: #d6cfc4;
+    --white: #ffffff;
+    --success: #2d7a4f;
+    --error: #a83232;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+  .site-header {
+    background: var(--navy-dark);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 22px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-seal {
+    width: 46px;
+    height: 46px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-seal svg { width: 26px; height: 26px; }
+  .header-titles { flex: 1; }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 0.72rem;
+    color: var(--gold-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+    font-weight: 300;
+  }
+  .header-badge {
+    font-size: 0.68rem;
+    background: rgba(201,150,58,0.18);
+    color: var(--gold-light);
+    border: 1px solid rgba(201,150,58,0.4);
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* ── PROGRESS BAR ───────────────────────────────────── */
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.07);
+    height: 3px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), #f0c060);
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  /* ── MAIN LAYOUT ────────────────────────────────────── */
+  .page-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* ── INTRO CARD ─────────────────────────────────────── */
+  .intro-card {
+    background: var(--white);
+    border-left: 4px solid var(--gold);
+    padding: 20px 24px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 36px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .intro-card p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .intro-card strong { color: var(--navy); }
+
+  /* ── SECTION ────────────────────────────────────────── */
+  .section {
+    margin-bottom: 36px;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+  .section-header {
+    background: var(--navy);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    width: 28px;
+    height: 28px;
+    background: var(--gold);
+    color: var(--navy-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .section-body {
+    padding: 24px;
+  }
+
+  /* ── FIELD GRID ─────────────────────────────────────── */
+  .field-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .field-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .field-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .field-grid.cols-1-2 { grid-template-columns: 1fr 2fr; }
+
+  @media (max-width: 600px) {
+    .field-grid.cols-2,
+    .field-grid.cols-3,
+    .field-grid.cols-1-2 { grid-template-columns: 1fr; }
+    .header-badge { display: none; }
+  }
+
+  /* ── FIELD ──────────────────────────────────────────── */
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.73rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  label .req { color: var(--gold); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  textarea,
+  select {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text);
+    background: var(--cream);
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--navy);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(27,58,107,0.10);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 72px;
+    line-height: 1.6;
+  }
+  input::placeholder, textarea::placeholder { color: #b0a898; }
+
+  /* ── QUESTION BLOCK ─────────────────────────────────── */
+  .question-block {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .question-block:last-child { border-bottom: none; padding-bottom: 0; }
+  .question-block:first-child { padding-top: 0; }
+
+  .question-label {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .q-num {
+    min-width: 28px;
+    height: 28px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-text {
+    font-size: 0.93rem;
+    line-height: 1.55;
+    color: var(--text);
+    font-weight: 400;
+  }
+  .q-text em {
+    font-style: normal;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .sub-questions {
+    margin-left: 38px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .sub-q label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  /* ── RADIO / CHECKBOX ───────────────────────────────── */
+  .radio-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .radio-opt {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .radio-opt input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--navy);
+    cursor: pointer;
+  }
+
+  /* ── DIVIDER ────────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--line) 100%);
+    margin: 8px 0 20px;
+    opacity: 0.5;
+  }
+
+  /* ── SUBMIT AREA ────────────────────────────────────── */
+  .submit-area {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 28px 28px 24px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+  .submit-area p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .submit-area p strong { color: var(--navy); }
+
+  .btn-submit {
+    background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+    color: var(--white);
+    border: none;
+    padding: 15px 50px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    box-shadow: 0 4px 18px rgba(27,58,107,0.35);
+    text-transform: uppercase;
+  }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 24px rgba(27,58,107,0.45);
+  }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* ── SUCCESS / ERROR MSG ────────────────────────────── */
+  .msg {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    display: none;
+  }
+  .msg.success { background: #e8f5ee; color: var(--success); border: 1px solid #a8d9bc; display: block; }
+  .msg.error { background: #fdf0f0; color: var(--error); border: 1px solid #e8b8b8; display: block; }
+
+  /* ── CONFIDENTIAL NOTE ──────────────────────────────── */
+  .confidential {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 28px;
+    letter-spacing: 0.05em;
+  }
+  .confidential span {
+    border: 1px solid var(--line);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-seal">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="none" stroke="#C9963A" stroke-width="1.5"/>
+        <path d="M9 12l2 2 4-4" stroke="#C9963A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="header-titles">
+      <div class="header-title">Ficha de Entrevista Trabalhista</div>
+      <div class="header-sub">Documento Confidencial — Uso Interno do Escritório</div>
+    </div>
+    <div class="header-badge">🔒 Seguro</div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <p>Prezado(a) cliente, preencha este formulário com <strong>todas as informações solicitadas</strong>. Quanto mais completo, melhor será o atendimento ao seu caso. Ao final, clique em <strong>"Enviar ao Advogado"</strong>. Suas respostas serão enviadas diretamente ao escritório de forma segura.</p>
+  </div>
+
+  <form id="mainForm">
+
+    <!-- ── 1. DADOS PESSOAIS ────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Dados Pessoais</div>
+      </div>
+      <div class="section-body">
+        <div class="field-grid">
+          <div class="field full">
+            <label>Nome Completo <span class="req">*</span></label>
+            <input type="text" name="nome_completo" placeholder="Seu nome completo" required>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="field-grid cols-2">
+          <div class="field">
+            <label>Nacionalidade</label>
+            <input type="text" name="nacionalidade" placeholder="Ex: Brasileira">
+          </div>
+          <div class="field">
+            <label>Estado Civil</label>
+            <select name="estado_civil">
+              <option value="">Selecione...</option>
+              <option>Solteiro(a)</option>
+              <option>Casado(a)</option>
+              <option>Divorciado(a)</option>
+              <option>Viúvo(a)</option>
+              <option>União Estável</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>RG <span class="req">*</span></label>
+            <input type="text" name="rg" placeholder="Número do RG" required>
+          </div>
+          <div class="field">
+            <label>Órgão Expedidor</label>
+            <input type="text" name="orgao_expedidor" placeholder="Ex: SSP/SP">
+          </div>
+          <div class="field">
+            <label>CPF <span class="req">*</span></label>
+            <input type="text" name="cpf" placeholder="000.000.000-00" required>
+          </div>
+          <div class="field">
+            <label>Data de Nascimento</label>
+            <input type="date" name="data_nascimento">
+          </div>
+          <div class="field">
+            <label>CTPS n°</label>
+            <input type="text" name="ctps" placeholder="Número da CTPS">
+          </div>
+          <div class="field">
+            <label>Série</label>
+            <input type="text" name="ctps_serie" placeholder="Série">
+          </div>
+          <div class="field full">
+            <label>PIS/NIS</label>
+            <input type="text" name="pis" placeholder="Número do PIS/NIS">
+          </div>
+          <div class="field full">
+            <label>Endereço Completo <span class="req">*</span></label>
+            <input type="text" name="endereco" placeholder="Rua, número, complemento" required>
+          </div>
+          <div class="field">
+            <label>Bairro</label>
+            <input type="text" name="bairro" placeholder="Bairro">
+          </div>
+          <div class="field">
+            <label>Cidade</label>
+            <input type="text" name="cidade" placeholder="Cidade">
+          </div>
+          <div class="field">
+            <label>UF</label>
+            <input type="text" name="uf" placeholder="UF" maxlength="2">
+          </div>
+          <div class="field full">
+            <label>E-mail <span class="req">*</span></label>
+            <input type="email" name="email_cliente" placeholder="seu@email.com" required>
+          </div>
+          <div class="field">
+            <label>Telefone Residencial</label>
+            <input type="tel" name="tel_res" placeholder="(00) 0000-0000">
+          </div>
+          <div class="field">
+            <label>Celular</label>
+            <input type="tel" name="celular" placeholder="(00) 00000-0000">
+          </div>
+          <div class="field full">
+            <label>Nome da Mãe</label>
+            <input type="text" name="nome_mae" placeholder="Nome completo da mãe">
+          </div>
+          <div class="field full">
+            <label>Nome do Pai</label>
+            <input type="text" name="nome_pai" placeholder="Nome completo do pai">
+          </div>
+          <div class="field full">
+            <label>Nome do Cônjuge / Companheiro(a)</label>
+            <input type="text" name="conjuge" placeholder="Nome do cônjuge (se houver)">
+          </div>
+          <div class="field full">
+            <label>Nome dos Filhos</label>
+            <input type="text" name="filhos" placeholder="Nomes dos filhos (se houver)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2. EMPREGADOR ───────────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">Informações do Empregador</div>
+      </div>
+      <div class="section-body">
+        <div class="field-grid cols-2">
+          <div class="field full">
+            <label>Nome / Razão Social do Empregador <span class="req">*</span></label>
+            <input type="text" name="empregador_nome" placeholder="Nome ou razão social da empresa" required>
+          </div>
+          <div class="field">
+            <label>CNPJ / CPF do Empregador</label>
+            <input type="text" name="empregador_cnpj" placeholder="CNPJ ou CPF">
+          </div>
+          <div class="field">
+            <label>E-mail do Empregador</label>
+            <input type="email" name="empregador_email" placeholder="contato@empresa.com">
+          </div>
+          <div class="field full">
+            <label>Endereço do Empregador</label>
+            <input type="text" name="empregador_endereco" placeholder="Endereço completo da empresa">
+          </div>
+          <div class="field">
+            <label>Bairro</label>
+            <input type="text" name="empregador_bairro">
+          </div>
+          <div class="field">
+            <label>Cidade</label>
+            <input type="text" name="empregador_cidade">
+          </div>
+          <div class="field full">
+            <label>Nome do Superior Hierárquico Direto</label>
+            <input type="text" name="superior" placeholder="Nome do chefe / supervisor imediato">
+          </div>
+        </div>
+        <div class="divider"></div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:14px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">Empresas do mesmo grupo econômico (se houver)</p>
+        <div class="field-grid cols-2">
+          <div class="field">
+            <label>Razão Social</label>
+            <input type="text" name="grupo_nome" placeholder="Nome da empresa do grupo">
+          </div>
+          <div class="field">
+            <label>CNPJ/CPF</label>
+            <input type="text" name="grupo_cnpj" placeholder="CNPJ ou CPF">
+          </div>
+          <div class="field full">
+            <label>Endereço</label>
+            <input type="text" name="grupo_endereco" placeholder="Endereço da empresa do grupo">
+          </div>
+        </div>
+        <div class="divider"></div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:14px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">Empresas tomadoras de serviços (se houver)</p>
+        <div class="field-grid cols-2">
+          <div class="field">
+            <label>Razão Social</label>
+            <input type="text" name="tomadora_nome" placeholder="Nome da tomadora de serviços">
+          </div>
+          <div class="field">
+            <label>CNPJ/CPF</label>
+            <input type="text" name="tomadora_cnpj" placeholder="CNPJ ou CPF">
+          </div>
+          <div class="field full">
+            <label>Endereço / Cidade / UF</label>
+            <input type="text" name="tomadora_endereco" placeholder="Endereço da tomadora">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. CONTRATO E FUNÇÕES ───────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">Contrato, Funções e Jornada</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">1</div>
+            <div class="q-text">Qual foi o período trabalhado? Possuía registro em CTPS?<br><em>(Informe a data de início e o término do contrato)</em></div>
+          </div>
+          <textarea name="q1_periodo" placeholder="Ex: Trabalhei de 01/03/2018 a 15/07/2023. Tinha registro em CTPS."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">2</div>
+            <div class="q-text">Quais foram as funções exercidas e os períodos de exercício de cada uma?</div>
+          </div>
+          <textarea name="q2_funcoes" placeholder="Ex: Fui contratado como auxiliar de produção de jan/2018 a jun/2020, depois promovido a operador de máquinas até minha demissão."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">3</div>
+            <div class="q-text">Qual era o local da prestação de serviço? Quais setores você trabalhou?</div>
+          </div>
+          <textarea name="q3_local" placeholder="Descreva o endereço/local e os setores da empresa onde trabalhou."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">4</div>
+            <div class="q-text">Em caso de serviços terceirizados: quais foram as empresas tomadoras e os respectivos períodos de prestação de serviços?</div>
+          </div>
+          <textarea name="q4_terceirizados" placeholder="Se não houve terceirização, escreva 'Não se aplica'."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">5</div>
+            <div class="q-text">Qual era o horário de trabalho? Fazia intervalo para refeição?</div>
+          </div>
+          <textarea name="q5_horario" placeholder="Ex: Trabalhava das 7h às 17h. Tinha 1 hora de intervalo para almoço."></textarea>
+          <div class="sub-questions">
+            <div class="sub-q">
+              <label>5.1 — Havia cartão de ponto?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q5_1_ponto" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q5_1_ponto" value="Não"> Não</label>
+                <label class="radio-opt"><input type="radio" name="q5_1_ponto" value="Às vezes"> Às vezes</label>
+              </div>
+            </div>
+            <div class="sub-q">
+              <label>5.2 — Em caso negativo, havia mais de 20 funcionários na empresa?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q5_2_funcionarios" value="Sim, mais de 20"> Sim, mais de 20</label>
+                <label class="radio-opt"><input type="radio" name="q5_2_funcionarios" value="Não, menos de 20"> Não, menos de 20</label>
+                <label class="radio-opt"><input type="radio" name="q5_2_funcionarios" value="Não sei"> Não sei</label>
+              </div>
+            </div>
+            <div class="sub-q">
+              <label>5.3 — Os horários registrados no cartão de ponto estavam corretos?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q5_3_corretos" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q5_3_corretos" value="Não"> Não</label>
+                <label class="radio-opt"><input type="radio" name="q5_3_corretos" value="Parcialmente"> Parcialmente</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">6</div>
+            <div class="q-text">Fazia horas extras? Se sim, recebia por elas?</div>
+          </div>
+          <div class="sub-questions">
+            <div class="sub-q">
+              <label>Fazia horas extras?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q6_extras" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q6_extras" value="Não"> Não</label>
+              </div>
+            </div>
+            <div class="sub-q">
+              <label>6.1 — O pagamento das horas extras era feito "por fora" (em dinheiro sem registro) ou no holerite?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q6_1_pagamento" value="No holerite"> No holerite</label>
+                <label class="radio-opt"><input type="radio" name="q6_1_pagamento" value="Por fora"> Por fora</label>
+                <label class="radio-opt"><input type="radio" name="q6_1_pagamento" value="Não recebia"> Não recebia</label>
+                <label class="radio-opt"><input type="radio" name="q6_1_pagamento" value="Não se aplica"> Não se aplica</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">7</div>
+            <div class="q-text">Qual foi o último salário? Descreva toda a evolução salarial. Havia salários pagos "por fora"?</div>
+          </div>
+          <textarea name="q7_salario" placeholder="Ex: Comecei ganhando R$1.500,00 em 2018. Em 2021 passei para R$2.200,00. Recebia R$300,00 por fora em dinheiro como complemento."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">8</div>
+            <div class="q-text">Já foi transferido para outra localidade? <em>(Ocasionou mudança de endereço? Foi provisória ou definitiva? As despesas foram pagas pela empresa?)</em></div>
+          </div>
+          <div class="sub-questions">
+            <div class="sub-q">
+              <label>Foi transferido?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q8_transferencia" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q8_transferencia" value="Não"> Não</label>
+              </div>
+            </div>
+          </div>
+          <textarea name="q8_detalhes" style="margin-top:10px" placeholder="Se sim, descreva os detalhes da transferência (local, período, se mudou de endereço, se a empresa pagou)."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">9</div>
+            <div class="q-text">Descreva o local de trabalho.</div>
+          </div>
+          <textarea name="q9_local" placeholder="Descreva as condições físicas do ambiente de trabalho."></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 4. SAÚDE E SEGURANÇA ────────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Saúde, Segurança e Insalubridade</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">10</div>
+            <div class="q-text">Havia exposição a: ruído excessivo, calor, produtos químicos, frio ou umidade?</div>
+          </div>
+          <textarea name="q10_exposicao" placeholder="Descreva os agentes a que você era exposto no trabalho."></textarea>
+          <div class="sub-questions">
+            <div class="sub-q">
+              <label>10.1 — Quais EPIs (equipamentos de proteção) você recebia?</label>
+              <input type="text" name="q10_1_epis" placeholder="Ex: Capacete, luvas, protetor auricular...">
+            </div>
+            <div class="sub-q">
+              <label>10.2 — Recebeu treinamento para utilização dos EPIs?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q10_2_treinamento" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q10_2_treinamento" value="Não"> Não</label>
+              </div>
+            </div>
+            <div class="sub-q">
+              <label>10.3 — Os EPIs eram substituídos quando necessário?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q10_3_substituicao" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q10_3_substituicao" value="Não"> Não</label>
+                <label class="radio-opt"><input type="radio" name="q10_3_substituicao" value="Às vezes"> Às vezes</label>
+              </div>
+            </div>
+            <div class="sub-q">
+              <label>10.4 — Você usava os EPIs fornecidos?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q10_4_usava" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q10_4_usava" value="Não"> Não</label>
+                <label class="radio-opt"><input type="radio" name="q10_4_usava" value="Parcialmente"> Parcialmente</label>
+              </div>
+            </div>
+            <div class="sub-q">
+              <label>10.5 — A empresa exigia o uso dos EPIs?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q10_5_exigia" value="Sim"> Sim</label>
+                <label class="radio-opt"><input type="radio" name="q10_5_exigia" value="Não"> Não</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">11</div>
+            <div class="q-text">Precisava adentrar cabine de energia elétrica ou câmara fria?</div>
+          </div>
+          <div class="radio-row">
+            <label class="radio-opt"><input type="radio" name="q11_cabine" value="Sim, câmara fria"> Sim, câmara fria</label>
+            <label class="radio-opt"><input type="radio" name="q11_cabine" value="Sim, cabine elétrica"> Sim, cabine elétrica</label>
+            <label class="radio-opt"><input type="radio" name="q11_cabine" value="Sim, ambos"> Sim, ambos</label>
+            <label class="radio-opt"><input type="radio" name="q11_cabine" value="Não"> Não</label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">12</div>
+            <div class="q-text">Já sofreu algum acidente de trabalho? Quando?</div>
+          </div>
+          <textarea name="q12_acidente" placeholder="Descreva o acidente, quando ocorreu e quais foram as consequências."></textarea>
+          <div class="sub-questions">
+            <div class="sub-q">
+              <label>12.1 — Já teve algum problema de saúde relacionado ao trabalho? Em qual período?</label>
+              <textarea name="q12_1_saude" placeholder="Ex: Desenvolvi tendinite em 2021 por esforço repetitivo."></textarea>
+            </div>
+            <div class="sub-q">
+              <label>12.2 — Houve emissão de CAT (Comunicação de Acidente de Trabalho)?</label>
+              <div class="radio-row">
+                <label class="radio-opt"><input type="radio" name="q12_2_cat" value="Sim, pela empresa"> Sim, pela empresa</label>
+                <label class="radio-opt"><input type="radio" name="q12_2_cat" value="Sim, por terceiros"> Sim, por terceiros</label>
+                <label class="radio-opt"><input type="radio" name="q12_2_cat" value="Não"> Não</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">13</div>
+            <div class="q-text">Tem algum problema de saúde atual? Faz tratamento médico? Toma medicamentos?</div>
+          </div>
+          <textarea name="q13_saude_atual" placeholder="Informe condições de saúde atuais relevantes."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">14</div>
+            <div class="q-text">Esteve afastado do trabalho com benefício pago pelo INSS? Qual o motivo? Em qual período?</div>
+          </div>
+          <textarea name="q14_inss_afastamento" placeholder="Informe o tipo de benefício (auxílio-doença, acidentário etc.) e o período."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">15</div>
+            <div class="q-text">Sabe informar o tempo de contribuição ao INSS até a data de saída da empresa?</div>
+          </div>
+          <input type="text" name="q15_inss_contrib" placeholder="Ex: Aproximadamente 8 anos e 4 meses.">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 5. FGTS E EQUIPARAÇÃO ───────────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">FGTS, Equiparação e Rescisão</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">16</div>
+            <div class="q-text">O empregador recolhia corretamente os depósitos do FGTS?</div>
+          </div>
+          <div class="radio-row">
+            <label class="radio-opt"><input type="radio" name="q16_fgts" value="Sim"> Sim</label>
+            <label class="radio-opt"><input type="radio" name="q16_fgts" value="Não"> Não</label>
+            <label class="radio-opt"><input type="radio" name="q16_fgts" value="Não sei"> Não sei</label>
+            <label class="radio-opt"><input type="radio" name="q16_fgts" value="Parcialmente"> Parcialmente</label>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">17</div>
+            <div class="q-text">Havia algum colega que exercia as mesmas atividades e recebia salário maior?</div>
+          </div>
+          <div class="sub-questions">
+            <div class="sub-q">
+              <label>17.1 — Nome e cargo do colega</label>
+              <input type="text" name="q17_1_colega" placeholder="Nome e cargo do colega com salário maior">
+            </div>
+            <div class="sub-q">
+              <label>17.2 — Qual a diferença de tempo na função entre você e esse colega?</label>
+              <input type="text" name="q17_2_diferenca" placeholder="Ex: Ele tem 2 anos a mais na função que eu.">
+            </div>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">18</div>
+            <div class="q-text">Já trabalhou em desvio de função? Em qual período?</div>
+          </div>
+          <textarea name="q18_desvio" placeholder="Ex: Fui contratado como auxiliar, mas exercia funções de supervisor desde 2020."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">19</div>
+            <div class="q-text">Já trabalhou em acúmulo de função? Em qual período?</div>
+          </div>
+          <textarea name="q19_acumulo" placeholder="Ex: Além das minhas funções, também realizava o trabalho de outro setor sem receber adicional."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">20</div>
+            <div class="q-text">Qual a causa da extinção do contrato de trabalho?</div>
+          </div>
+          <div class="radio-row" style="margin-bottom:10px">
+            <label class="radio-opt"><input type="radio" name="q20_causa" value="Demissão sem justa causa"> Demissão sem justa causa</label>
+            <label class="radio-opt"><input type="radio" name="q20_causa" value="Pedido de demissão"> Pedido de demissão</label>
+            <label class="radio-opt"><input type="radio" name="q20_causa" value="Rescisão indireta"> Rescisão indireta</label>
+            <label class="radio-opt"><input type="radio" name="q20_causa" value="Demissão por justa causa"> Demissão por justa causa</label>
+            <label class="radio-opt"><input type="radio" name="q20_causa" value="Outro"> Outro</label>
+          </div>
+          <textarea name="q20_detalhes" placeholder="Descreva os detalhes da rescisão."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">21</div>
+            <div class="q-text">Recebeu corretamente as verbas rescisórias? Em qual data? Como se deu o pagamento?</div>
+          </div>
+          <textarea name="q21_verbas" placeholder="Descreva o que recebeu, a data do pagamento e a forma (cheque, depósito, dinheiro)."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">22</div>
+            <div class="q-text">Recebia adicional noturno?</div>
+          </div>
+          <div class="radio-row">
+            <label class="radio-opt"><input type="radio" name="q22_noturno" value="Sim"> Sim</label>
+            <label class="radio-opt"><input type="radio" name="q22_noturno" value="Não"> Não</label>
+            <label class="radio-opt"><input type="radio" name="q22_noturno" value="Deveria receber, mas não recebia"> Deveria receber, mas não recebia</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 6. HISTÓRICO E TESTEMUNHAS ─────────────────── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div class="section-title">Histórico Judicial e Testemunhas</div>
+      </div>
+      <div class="section-body">
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">23</div>
+            <div class="q-text">Já promoveu ou promove ação judicial contra o empregador?</div>
+          </div>
+          <div class="radio-row" style="margin-bottom:10px">
+            <label class="radio-opt"><input type="radio" name="q23_acao" value="Sim"> Sim</label>
+            <label class="radio-opt"><input type="radio" name="q23_acao" value="Não"> Não</label>
+          </div>
+          <textarea name="q23_detalhes" placeholder="Se sim, informe o número do processo e a vara trabalhista."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">24</div>
+            <div class="q-text">Já foi testemunha ou preposto em processos envolvendo o empregador?</div>
+          </div>
+          <div class="radio-row" style="margin-bottom:10px">
+            <label class="radio-opt"><input type="radio" name="q24_testemunha" value="Sim"> Sim</label>
+            <label class="radio-opt"><input type="radio" name="q24_testemunha" value="Não"> Não</label>
+          </div>
+          <textarea name="q24_detalhes" placeholder="Se sim, descreva em qual processo e sua função."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">25</div>
+            <div class="q-text">Documentos que você possui para entregar ao advogado:</div>
+          </div>
+          <textarea name="q25_documentos" placeholder="Ex: RG, CPF, CTPS, holerites de jan/2020 a jul/2023, extrato do FGTS, recibos de férias, TRCT..."></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">26</div>
+            <div class="q-text">Nome das testemunhas e períodos em que trabalharam junto a você:</div>
+          </div>
+          <textarea name="q26_testemunhas" placeholder="Testemunha 1: Nome — trabalhou junto de 2019 a 2022&#10;Testemunha 2: Nome — trabalhou junto de 2020 a 2023"></textarea>
+        </div>
+
+        <div class="question-block">
+          <div class="question-label">
+            <div class="q-num">27</div>
+            <div class="q-text">Outras informações relevantes que deseja acrescentar:</div>
+          </div>
+          <textarea name="q27_outros" rows="4" placeholder="Acrescente qualquer informação adicional que considere importante para o seu caso."></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SUBMIT ───────────────────────────────────────── -->
+    <div class="submit-area">
+      <p>Ao enviar, suas respostas serão encaminhadas diretamente ao advogado em <strong>marcus.eucaristos@gmail.com</strong>.<br>Certifique-se de que todas as informações estão corretas antes de enviar.</p>
+      <button type="submit" class="btn-submit" id="submitBtn">
+        Enviar ao Advogado
+      </button>
+      <div class="msg" id="successMsg">
+        ✅ <strong>Enviado com sucesso!</strong> Suas respostas foram encaminhadas ao advogado. Em breve você receberá um contato.
+      </div>
+      <div class="msg" id="errorMsg">
+        ❌ <strong>Erro ao enviar.</strong> Por favor, verifique sua conexão e tente novamente. Se o problema persistir, entre em contato diretamente pelo e-mail.
+      </div>
+    </div>
+
+  </form>
+
+  <div class="confidential">
+    <span>🔒 Documento confidencial — uso exclusivo do escritório de advocacia</span>
+  </div>
+
+</div>
+
+<script>
+  // ── PROGRESS BAR ──────────────────────────────────────
+  const form = document.getElementById('mainForm');
+  const progressBar = document.getElementById('progressBar');
+
+  function updateProgress() {
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
+    let filled = 0;
+    inputs.forEach(inp => { if (inp.value.trim()) filled++; });
+    const all = form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea, select');
+    let allFilled = 0;
+    all.forEach(inp => { if (inp.value.trim()) allFilled++; });
+    const pct = Math.min(100, Math.round((allFilled / all.length) * 100));
+    progressBar.style.width = pct + '%';
+  }
+
+  form.addEventListener('input', updateProgress);
+  form.addEventListener('change', updateProgress);
+  updateProgress();
+
+  // ── FORM SUBMIT via Formspree ─────────────────────────
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    // Collect all form data
+    const data = new FormData(form);
+    // Add a subject line
+    data.append('_subject', 'Nova Ficha de Entrevista Trabalhista — ' + (data.get('nome_completo') || 'Cliente'));
+    // Redirect to same page after submit (no Formspree thank you page)
+    data.append('_next', window.location.href);
+
+    try {
+      // Using Formspree - user needs to sign up at formspree.io and replace YOUR_FORM_ID
+      // OR use the mailto fallback below
+      const response = await fetch('https://formspree.io/f/xzdogzpp', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        successMsg.className = 'msg success';
+        btn.textContent = '✅ Enviado!';
+        progressBar.style.width = '100%';
+        progressBar.style.background = '#2d7a4f';
+        form.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
+        window.scrollTo({ top: document.querySelector('.submit-area').offsetTop - 80, behavior: 'smooth' });
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      // Fallback: open mailto with form data
+      errorMsg.className = 'msg error';
+      errorMsg.innerHTML = `❌ <strong>O envio automático requer configuração.</strong> Consulte as instruções abaixo ou <a href="#instrucoes" style="color:var(--navy);font-weight:700">veja como configurar</a>. Como alternativa, use o botão abaixo para enviar por e-mail manual.`;
+      
+      // Build mailto body
+      let body = 'FICHA DE ENTREVISTA TRABALHISTA\n';
+      body += '================================\n\n';
+      const formData = new FormData(form);
+      for (let [key, value] of formData.entries()) {
+        if (!key.startsWith('_') && value && value.trim()) {
+          const label = key.replace(/_/g, ' ').replace(/q\d+[_\d]*/i, '').trim();
+          body += `${key.toUpperCase()}: ${value}\n\n`;
+        }
+      }
+      
+      const mailtoBtn = document.createElement('button');
+      mailtoBtn.type = 'button';
+      mailtoBtn.textContent = '📧 Enviar por E-mail Manual';
+      mailtoBtn.style.cssText = 'margin-top:12px;background:var(--navy);color:white;border:none;padding:10px 24px;border-radius:6px;cursor:pointer;font-family:Lato,sans-serif;font-size:0.9rem;font-weight:700;';
+      mailtoBtn.onclick = () => {
+        const nome = document.querySelector('[name="nome_completo"]').value || 'Cliente';
+        window.location.href = `mailto:marcus.eucaristos@gmail.com?subject=Ficha%20de%20Entrevista%20Trabalhista%20-%20${encodeURIComponent(nome)}&body=${encodeURIComponent(body)}`;
+      };
+      document.querySelector('.submit-area').appendChild(mailtoBtn);
+      btn.textContent = 'Tentar Novamente';
+      btn.disabled = false;
+    }
+  });
+</script>
+
+<!-- INSTRUCOES -->
+<div id="instrucoes" style="max-width:860px;margin:0 auto 60px;padding:0 20px;display:none;">
+  <details style="background:#fff;border-radius:10px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+    <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:0.95rem;">📋 Instruções para ativar o envio automático por e-mail</summary>
+    <div style="margin-top:16px;font-size:0.88rem;line-height:1.7;color:#555;">
+      <p><strong>Opção 1 — Formspree (gratuito, fácil):</strong></p>
+      <ol style="margin-left:20px;margin-top:8px;">
+        <li>Acesse <a href="https://formspree.io" target="_blank" style="color:var(--navy);">formspree.io</a> e crie uma conta gratuita.</li>
+        <li>Crie um novo formulário com o e-mail <strong>marcus.eucaristos@gmail.com</strong>.</li>
+        <li>Copie o código do formulário (algo como <code>xpzgkwrb</code>).</li>
+        <li>No HTML deste arquivo, substitua <code>YOUR_FORM_ID</code> pelo código copiado.</li>
+      </ol>
+      <p style="margin-top:12px;"><strong>Opção 2 — Envio manual:</strong> Use o botão "Enviar por E-mail Manual" que aparece em caso de erro para abrir o seu cliente de e-mail com os dados já preenchidos.</p>
+    </div>
+  </details>
+</div>
+
+<script>
+  // Show instructions if there's an error
+  document.getElementById('mainForm').addEventListener('submit', function() {
+    setTimeout(() => {
+      if (document.getElementById('errorMsg').style.display !== 'none') {
+        document.getElementById('instrucoes').style.display = 'block';
+      }
+    }, 2000);
+  });
+</script>
+
+</body>
+</html>
